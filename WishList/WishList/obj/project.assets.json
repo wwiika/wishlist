@@ -1,0 +1,121 @@
+{
+  "version": 3,
+  "targets": {
+    "net8.0": {
+      "WishList.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "WishList.ValueObjects": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/WishList.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/WishList.Domain.dll": {}
+        }
+      },
+      "WishList.ValueObjects/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/WishList.ValueObjects.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/WishList.ValueObjects.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "WishList.Domain/1.0.0": {
+      "type": "project",
+      "path": "../WishList.Domain/WishList.Domain.csproj",
+      "msbuildProject": "../WishList.Domain/WishList.Domain.csproj"
+    },
+    "WishList.ValueObjects/1.0.0": {
+      "type": "project",
+      "path": "../WishList.ValueObjects/WishList.ValueObjects.csproj",
+      "msbuildProject": "../WishList.ValueObjects/WishList.ValueObjects.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net8.0": [
+      "WishList.Domain >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\vipwo\\.nuget\\packages\\": {},
+    "D:\\nyznie stuskhi\\Visual Studio\\komponenti\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "E:\\вуз\\с#\\2 курс\\курсовая\\WishList\\WishList.csproj",
+      "projectName": "WishList",
+      "projectPath": "E:\\вуз\\с#\\2 курс\\курсовая\\WishList\\WishList.csproj",
+      "packagesPath": "C:\\Users\\vipwo\\.nuget\\packages\\",
+      "outputPath": "E:\\вуз\\с#\\2 курс\\курсовая\\WishList\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "D:\\nyznie stuskhi\\Visual Studio\\komponenti\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\vipwo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net8.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "projectReferences": {
+            "E:\\вуз\\с#\\2 курс\\курсовая\\WishList.Domain\\WishList.Domain.csproj": {
+              "projectPath": "E:\\вуз\\с#\\2 курс\\курсовая\\WishList.Domain\\WishList.Domain.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "10.0.200"
+    },
+    "frameworks": {
+      "net8.0": {
+        "targetAlias": "net8.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

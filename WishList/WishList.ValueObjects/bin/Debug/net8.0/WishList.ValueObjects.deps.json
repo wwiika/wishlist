@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "WishList.ValueObjects/1.0.0": {
+        "runtime": {
+          "WishList.ValueObjects.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "WishList.ValueObjects/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

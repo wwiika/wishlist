@@ -1,0 +1,15 @@
+E:\вуз\с#\2 курс\курсовая\WishList.Domain\bin\Debug\net8.0\WishList.Domain.deps.json
+E:\вуз\с#\2 курс\курсовая\WishList.Domain\bin\Debug\net8.0\WishList.Domain.dll
+E:\вуз\с#\2 курс\курсовая\WishList.Domain\bin\Debug\net8.0\WishList.Domain.pdb
+E:\вуз\с#\2 курс\курсовая\WishList.Domain\bin\Debug\net8.0\WishList.ValueObjects.dll
+E:\вуз\с#\2 курс\курсовая\WishList.Domain\bin\Debug\net8.0\WishList.ValueObjects.pdb
+E:\вуз\с#\2 курс\курсовая\WishList.Domain\obj\Debug\net8.0\WishList.Domain.csproj.AssemblyReference.cache
+E:\вуз\с#\2 курс\курсовая\WishList.Domain\obj\Debug\net8.0\WishList.Domain.GeneratedMSBuildEditorConfig.editorconfig
+E:\вуз\с#\2 курс\курсовая\WishList.Domain\obj\Debug\net8.0\WishList.Domain.AssemblyInfoInputs.cache
+E:\вуз\с#\2 курс\курсовая\WishList.Domain\obj\Debug\net8.0\WishList.Domain.AssemblyInfo.cs
+E:\вуз\с#\2 курс\курсовая\WishList.Domain\obj\Debug\net8.0\WishList.Domain.csproj.CoreCompileInputs.cache
+E:\вуз\с#\2 курс\курсовая\WishList.Domain\obj\Debug\net8.0\WishList.5D7E2CA6.Up2Date
+E:\вуз\с#\2 курс\курсовая\WishList.Domain\obj\Debug\net8.0\WishList.Domain.dll
+E:\вуз\с#\2 курс\курсовая\WishList.Domain\obj\Debug\net8.0\refint\WishList.Domain.dll
+E:\вуз\с#\2 курс\курсовая\WishList.Domain\obj\Debug\net8.0\WishList.Domain.pdb
+E:\вуз\с#\2 курс\курсовая\WishList.Domain\obj\Debug\net8.0\ref\WishList.Domain.dll

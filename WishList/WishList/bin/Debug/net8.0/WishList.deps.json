@@ -1,0 +1,55 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "WishList/1.0.0": {
+        "dependencies": {
+          "WishList.Domain": "1.0.0"
+        },
+        "runtime": {
+          "WishList.dll": {}
+        }
+      },
+      "WishList.Domain/1.0.0": {
+        "dependencies": {
+          "WishList.ValueObjects": "1.0.0"
+        },
+        "runtime": {
+          "WishList.Domain.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "WishList.ValueObjects/1.0.0": {
+        "runtime": {
+          "WishList.ValueObjects.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "WishList/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "WishList.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "WishList.ValueObjects/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

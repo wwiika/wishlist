@@ -1,0 +1,11 @@
+E:\вуз\с#\2 курс\курсовая\WishList.ValueObjects\bin\Debug\net8.0\WishList.ValueObjects.deps.json
+E:\вуз\с#\2 курс\курсовая\WishList.ValueObjects\bin\Debug\net8.0\WishList.ValueObjects.dll
+E:\вуз\с#\2 курс\курсовая\WishList.ValueObjects\bin\Debug\net8.0\WishList.ValueObjects.pdb
+E:\вуз\с#\2 курс\курсовая\WishList.ValueObjects\obj\Debug\net8.0\WishList.ValueObjects.GeneratedMSBuildEditorConfig.editorconfig
+E:\вуз\с#\2 курс\курсовая\WishList.ValueObjects\obj\Debug\net8.0\WishList.ValueObjects.AssemblyInfoInputs.cache
+E:\вуз\с#\2 курс\курсовая\WishList.ValueObjects\obj\Debug\net8.0\WishList.ValueObjects.AssemblyInfo.cs
+E:\вуз\с#\2 курс\курсовая\WishList.ValueObjects\obj\Debug\net8.0\WishList.ValueObjects.csproj.CoreCompileInputs.cache
+E:\вуз\с#\2 курс\курсовая\WishList.ValueObjects\obj\Debug\net8.0\WishList.ValueObjects.dll
+E:\вуз\с#\2 курс\курсовая\WishList.ValueObjects\obj\Debug\net8.0\refint\WishList.ValueObjects.dll
+E:\вуз\с#\2 курс\курсовая\WishList.ValueObjects\obj\Debug\net8.0\WishList.ValueObjects.pdb
+E:\вуз\с#\2 курс\курсовая\WishList.ValueObjects\obj\Debug\net8.0\ref\WishList.ValueObjects.dll
