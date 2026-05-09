@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/Domain/" />
+  <Folder Name="/Domain/WishList.Domain/">
+    <Project Path="../WishList.Domain/WishList.Domain.csproj" />
+  </Folder>
+  <Folder Name="/Domain/WishList.ValueObjects/">
+    <Project Path="../WishList.ValueObjects/WishList.ValueObjects.csproj" />
+  </Folder>
+  <Project Path="WishList.csproj" />
+</Solution>
