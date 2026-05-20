@@ -7,54 +7,67 @@ namespace WishList.Domain.Entities;
 
 public class Gift : Entity<Guid>
 {
-    private readonly List<Reservation> _reservations = new();
+    private readonly ICollection<Reservation> _reservations = new List<Reservation>();
 
-    public UserId OwnerId { get; private set; }
+    public User User { get; private set; }
     public Title Title { get; private set; }
     public Link? Link { get; private set; }
     public Price Price { get; private set; }
     public GiftStatus Status { get; private set; }
-
-    public IReadOnlyList<Reservation> Reservations => _reservations.AsReadOnly();
+    public IReadOnlyCollection<Reservation> Reservations => _reservations as IReadOnlyCollection<Reservation> ?? _reservations.ToList().AsReadOnly();
     public Reservation? CurrentReservation { get; private set; }
 
-    public bool IsAvailable => Status == GiftStatus.Available;
-    public bool IsReserved => Status == GiftStatus.Reserved;
-    public bool IsPurchased => Status == GiftStatus.Purchased;
-
-    public Gift(UserId ownerId, Title title, Link? link, Price price) : base(Guid.NewGuid())
+    public Gift(User user, Title title, Link? link, Price price) : base(Guid.NewGuid())
     {
-        OwnerId = ownerId;
+        User = user ?? throw new ArgumentNullValueException(nameof(user));
+        Title = title ?? throw new ArgumentNullValueException(nameof(title));
+        Link = link;
+        Price = price ?? throw new ArgumentNullValueException(nameof(price));
+        Status = GiftStatus.Available;
+    }
+
+    protected Gift() : base() { }
+
+    protected Gift(Guid id, User user, Title title, Link? link, Price price, GiftStatus status) : base(id)
+    {
+        User = user;
         Title = title;
         Link = link;
         Price = price;
-        Status = GiftStatus.Available;
+        Status = status;
     }
 
     public bool Update(Title? title, Link? link, Price? price)
     {
-        if (Status == GiftStatus.Purchased || Status == GiftStatus.Reserved)
-            return false;
+        if (Status == GiftStatus.Purchased)
+            throw new GiftAlreadyPurchasedException(this);
 
-        if (title != null) Title = title;
-        if (link != null) Link = link;
-        if (price != null) Price = price;
+        if (Status == GiftStatus.Reserved)
+            throw new GiftAlreadyReservedException(this, null!);
 
-        return true;
+        bool changed = false;
+        if (title != null) { Title = title; changed = true; }
+        if (link != null) { Link = link; changed = true; }
+        if (price != null) { Price = price; changed = true; }
+
+        return changed;
     }
 
-    public Reservation Reserve(UserId friendId)
+    public Reservation Reserve(Friend friend)
     {
-        if (friendId == OwnerId)
-            throw new CannotReserveOwnGiftException();
+        if (friend is null)
+            throw new ArgumentNullValueException(nameof(friend));
+
+        if (User.UserId == friend.FriendId)
+            throw new CannotReserveOwnGiftException(this, friend);
 
         if (Status == GiftStatus.Purchased)
             throw new GiftAlreadyPurchasedException(this);
 
         if (Status == GiftStatus.Reserved)
-            throw new GiftAlreadyReservedException(this);
+            throw new GiftAlreadyReservedException(this,friend);
 
-        var reservation = new Reservation(this, friendId);
+        var reservation = new Reservation(this, friend);
         _reservations.Add(reservation);
         CurrentReservation = reservation;
         Status = GiftStatus.Reserved;
@@ -62,28 +75,39 @@ public class Gift : Entity<Guid>
         return reservation;
     }
 
-    public bool MarkAsPurchased(UserId buyerId)
+    public bool MarkAsPurchasedByOwner()
     {
-        if (Status != GiftStatus.Reserved)
+        if (Status == GiftStatus.Purchased)
             return false;
 
-        if (CurrentReservation?.FriendId != buyerId)
-            return false;
+        if (Status == GiftStatus.Reserved)
+        {
+            if (CurrentReservation?.Friend != null)
+                throw new InvalidOperationException($"Подарок уже забронирован пользователем {CurrentReservation.Friend.Username.Value}");
+        }
 
         Status = GiftStatus.Purchased;
-        CurrentReservation.MarkAsPurchased();
         return true;
     }
 
-    public bool CancelReservation()
+    public void MarkAsPurchasedByReservation()
     {
-        if (Status != GiftStatus.Reserved)
-            return false;
+        if (Status == GiftStatus.Purchased)
+            return;
 
-        CurrentReservation?.Cancel();
-        CurrentReservation = null;
-        Status = GiftStatus.Available;
-        return true;
+        if (Status != GiftStatus.Reserved)
+            throw new InvalidOperationException($"Нельзя купить подарок в статусе {Status}");
+
+        Status = GiftStatus.Purchased;
+    }
+
+    public void ClearCurrentReservation()
+    {
+        if (CurrentReservation != null && CurrentReservation.Status != ReservationStatus.Active)
+        {
+            CurrentReservation = null;
+            Status = GiftStatus.Available;
+        }
     }
 
     public override string ToString()

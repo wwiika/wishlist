@@ -10,24 +10,24 @@ internal class Program
     {
         try
         {
-            Console.WriteLine("---- ПОЛЬЗОВАТЕЛИ ----");
-            var ownerId = UserId.New();
-            var friendId = UserId.New();
-            Console.WriteLine($"Владелец: ID = {ownerId.Value}");
-            Console.WriteLine($"Друг: ID = {friendId.Value}");
+            Console.WriteLine("---- СОЗДАНИЕ ПОЛЬЗОВАТЕЛЯ И ДРУГА ----");
+            var user = new User(UserId.New(), new Username("Лариса Долина"));
+            var friend = new Friend(UserId.New(), new Username("Тимати"));
+            Console.WriteLine($"Пользователь: {user.Username.Value}, ID = {user.UserId.Value}");
+            Console.WriteLine($"Друг: {friend.Username.Value}, ID = {friend.FriendId.Value}");
             Console.WriteLine();
 
-            Console.WriteLine("---- СОЗДАНИЕ ПОДАРКОВ ----");
-            var gift1 = new Gift(ownerId, new Title("Белый дом"), new Link("https://example.com/1"), new Price(150000m));
-            var gift2 = new Gift(ownerId, new Title("Голубые ставни"), new Link("https://example.com/2"), new Price(2500m));
-            var gift3 = new Gift(ownerId, new Title("Мольберт"), new Link("https://example.com/3"), new Price(22345m));
+            Console.WriteLine("---- ПОЛЬЗОВАТЕЛЬ СОЗДАЁТ ПОДАРКИ ----");
+            var gift1 = user.CreateGift(new Title("Белый дом"), new Link("https://youtu.be/kvjShHlG-nc?list=RDRyLc6Sa7L6U"), new Price(150000m));
+            var gift2 = user.CreateGift(new Title("Голубые ставни"), new Link("https://youtu.be/kvjShHlG-nc?list=RDRyLc6Sa7L6U"), new Price(2500m));
+            var gift3 = user.CreateGift(new Title("Мольберт"), new Link("https://youtu.be/kvjShHlG-nc?list=RDRyLc6Sa7L6U"), new Price(22345m));
             Console.WriteLine(gift1);
             Console.WriteLine(gift2);
             Console.WriteLine(gift3);
             Console.WriteLine();
 
-            Console.WriteLine("---- БРОНИРОВАНИЕ ----");
-            var reservation = gift1.Reserve(friendId);
+            Console.WriteLine("---- ДРУГ БРОНИРУЕТ ПОДАРОК ----");
+            var reservation = friend.ReserveGift(gift1);
             Console.WriteLine(gift1);
             Console.WriteLine($"Бронь создана: ID = {reservation.Id}");
             Console.WriteLine();
@@ -35,7 +35,7 @@ internal class Program
             Console.WriteLine("---- ОШИБКА: повторное бронирование ----");
             try
             {
-                gift1.Reserve(friendId);
+                friend.ReserveGift(gift1);
             }
             catch (GiftAlreadyReservedException ex)
             {
@@ -46,7 +46,8 @@ internal class Program
             Console.WriteLine("---- ОШИБКА: бронь своего подарка ----");
             try
             {
-                gift2.Reserve(ownerId);
+                var thisUser = new Friend(user.UserId, new Username("Билан"));
+                thisUser.ReserveGift(gift2);
             }
             catch (CannotReserveOwnGiftException ex)
             {
@@ -54,26 +55,74 @@ internal class Program
             }
             Console.WriteLine();
 
-            Console.WriteLine("---- ПОКУПКА ----");
-            var success = gift1.MarkAsPurchased(friendId);
-            Console.WriteLine(success ? gift1.ToString() : "Ошибка покупки");
+            Console.WriteLine("---- ПОЛЬЗОВАТЕЛЬ МЕНЯЕТ СТАТУС ПОДАРКА ----");
+            var gift4 = user.CreateGift(new Title("Кисточки"), new Link("https://youtu.be/kvjShHlG-nc?list=RDRyLc6Sa7L6U"), new Price(1000000m));
+            user.MarkGiftAsPurchased(gift4);
+            Console.WriteLine(gift4);
             Console.WriteLine();
 
-            Console.WriteLine("---- ОШИБКА: редактирование купленного ----");
-            var updated = gift1.Update(new Title("Голубой дом"), new Link("https://example.com/new"), new Price(126789m));
-            Console.WriteLine(updated ? "Обновлено" : "Нельзя обновить купленный подарок");
+            Console.WriteLine("---- ДРУГ ПОКУПАЕТ ПОДАРОК ----");
+            friend.PurchaseGift(reservation);
+            Console.WriteLine(gift1);
             Console.WriteLine();
 
-            Console.WriteLine("---- РЕДАКТИРОВАНИЕ ДОСТУПНОГО ----");
-            gift2.Update(new Title("Желтые ставни"), new Link("https://example.com/new2"), new Price(2345m));
+            Console.WriteLine("---- ОШИБКА: редактирование чужого подарка ----");
+            try
+            {
+                var otherUser = new User(UserId.New(), new Username("Лазарев"));
+                otherUser.EditGift(gift1, new Title("Микрофон"), new Link("https://youtu.be/kvjShHlG-nc?list=RDRyLc6Sa7L6U"), new Price(1000m));
+            }
+            catch (AnotherUserEditGiftException ex)
+            {
+                Console.WriteLine($"Ошибка: {ex.Message}");
+            }
+            Console.WriteLine();
+
+            Console.WriteLine("---- ОШИБКА: удаление чужого подарка ----");
+            try
+            {
+                var otherUser = new User(UserId.New(), new Username("Сережа Лазарев"));
+                otherUser.DeleteGift(gift1);
+            }
+            catch (AnotherUserDeleteGiftException ex)
+            {
+                Console.WriteLine($"Ошибка: {ex.Message}");
+            }
+            Console.WriteLine();
+
+            Console.WriteLine("---- ОШИБКА: друг покупает чужую бронь ----");
+            try
+            {
+                var otherFriend = new Friend(UserId.New(), new Username("Пугачева"));
+                otherFriend.PurchaseGift(reservation);
+            }
+            catch (AnotherFriendPurchaseReservationException ex)
+            {
+                Console.WriteLine($"Ошибка: {ex.Message}");
+            }
+            Console.WriteLine();
+
+            Console.WriteLine("---- ОШИБКА: друг отменяет чужую бронь ----");
+            try
+            {
+                var otherFriend = new Friend(UserId.New(), new Username("Олечка Бузова"));
+                otherFriend.CancelReservation(reservation);
+            }
+            catch (AnotherFriendCancelReservationException ex)
+            {
+                Console.WriteLine($"Ошибка: {ex.Message}");
+            }
+            Console.WriteLine();
+
+            Console.WriteLine("---- РЕДАКТИРОВАНИЕ ДОСТУПНОГО ПОДАРКА ----");
+            user.EditGift(gift2, new Title("Желтые ставни"), new Link("https://youtu.be/kvjShHlG-nc?list=RDRyLc6Sa7L6U"), new Price(2345m));
             Console.WriteLine(gift2);
             Console.WriteLine();
 
             Console.WriteLine("---- ОТМЕНА БРОНИ ----");
-            gift3.Reserve(friendId);
+            var reservation3 = friend.ReserveGift(gift3);
             Console.WriteLine($"До отмены: {gift3}");
-            var cancelled = gift3.CancelReservation();
-            Console.WriteLine(cancelled ? "Бронь отменена" : "Не удалось отменить бронь");
+            friend.CancelReservation(reservation3);
             Console.WriteLine($"После отмены: {gift3}");
             Console.WriteLine();
 
@@ -81,6 +130,7 @@ internal class Program
             Console.WriteLine(gift1);
             Console.WriteLine(gift2);
             Console.WriteLine(gift3);
+            Console.WriteLine(gift4);
         }
         catch (Exception ex)
         {

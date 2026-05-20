@@ -1,9 +1,10 @@
-﻿namespace WishList.Domain.Exceptions;
+﻿using WishList.Domain.Entities;
 
-public class CannotReserveOwnGiftException : InvalidOperationException
+namespace WishList.Domain.Exceptions;
+
+public class CannotReserveOwnGiftException(Gift gift, Friend friend)
+    : InvalidOperationException($"Пользователь {friend.Username.Value} не может забронировать свой собственный подарок '{gift.Title.Value}' (gift id = {gift.Id}).")
 {
-    public CannotReserveOwnGiftException()
-        : base("Нельзя забронировать свой подарок")
-    {
-    }
+    public Gift Gift => gift;
+    public Friend Friend => friend;
 }
