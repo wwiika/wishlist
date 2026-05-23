@@ -12,12 +12,5 @@ public class UserId : ValueObject<Guid>
 
     public static UserId New() => new(Guid.NewGuid());
 
-    private class UserIdValidator : IValidator<Guid>
-    {
-        public void Validate(Guid value)
-        {
-            if (value == Guid.Empty)
-                throw new ArgumentException("UserId не может быть пустым", nameof(value));
-        }
-    }
+
 }
