@@ -14,4 +14,7 @@
   <Folder Name="/Infrastructure/">
     <Project Path="Infrastructure/WishList.Infrastructure.EntityFramework/WishList.Infrastructure.EntityFramework.csproj" Id="6d356afb-024f-4b36-9c13-c46c0278e4c3" />
   </Folder>
+  <Folder Name="/Presentation/">
+    <Project Path="Presentation/WishList.WebHost/WishList.WebHost.csproj" Id="5d3bbb28-8bbf-40cd-bb23-afcda4390341" />
+  </Folder>
 </Solution>
