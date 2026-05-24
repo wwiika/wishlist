@@ -1,0 +1,17 @@
+<Solution>
+  <Folder Name="/Domain/">
+    <Project Path="Domain/WishList.DomainApp/WishList.csproj" />
+  </Folder>
+  <Folder Name="/Domain/WishList.Domain.Repositories.Abstractions/">
+    <Project Path="Domain/WishList.Domain.Repositories.Abstractions/WishList.Domain.Repositories.Abstractions/WishList.Domain.Repositories.Abstractions.csproj" Id="f773a89d-b751-4798-b4d3-ce057e982e7e" />
+  </Folder>
+  <Folder Name="/Domain/WishList.Domain/">
+    <Project Path="Domain/WishList.Domain/WishList.Domain.csproj" />
+  </Folder>
+  <Folder Name="/Domain/WishList.ValueObjects/">
+    <Project Path="Domain/WishList.ValueObjects/WishList.ValueObjects.csproj" />
+  </Folder>
+  <Folder Name="/Infrastructure/">
+    <Project Path="Infrastructure/WishList.Infrastructure.EntityFramework/WishList.Infrastructure.EntityFramework.csproj" Id="6d356afb-024f-4b36-9c13-c46c0278e4c3" />
+  </Folder>
+</Solution>
